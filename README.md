@@ -44,3 +44,7 @@ This is the **Assignment 1** of **Transformers and Attention-Based Deep Networks
 └── train.csv
 ```
 
+## Environment
+
+Python version is `Python 3.11.9`.
+
