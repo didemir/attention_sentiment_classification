@@ -4,12 +4,11 @@ sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from utils import icons, styles
 
 import pandas as pd
-PTH = f"0_data"
 
-def eda():
-  train_df = pd.read_csv(os.path.join(PTH, "train.csv"))
+def eda(pth: str) -> tuple:
+  train_df = pd.read_csv(os.path.join(pth, "train.csv"))
   train_df.name = "Train"
-  test_df = pd.read_csv(os.path.join(PTH, "test.csv"))
+  test_df = pd.read_csv(os.path.join(pth, "test.csv"))
   test_df.name = "Test"
   if train_df.columns.tolist() == test_df.columns.tolist():
     cols = train_df.columns.tolist()
@@ -63,7 +62,7 @@ def eda():
     print(train_df.columns.tolist())
     print("Columns of test dataset:")
     print(test_df.columns.tolist())
-
+  return train_df, test_df
 
 
 if __name__ == "__main__":

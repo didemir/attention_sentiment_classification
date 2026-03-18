@@ -1,4 +1,3 @@
-
 # Sentiment Analysis
 
 This is the **Assignment 1** of **Transformers and Attention-Based Deep Networks** Course.
@@ -15,9 +14,12 @@ This is the **Assignment 1** of **Transformers and Attention-Based Deep Networks
 
 - [ ] Data exploration and pre-processing
   - [ ] Prepare an Exploratory Data Analysis (EDA)
-    - [ ] Indicate distribution of the sentiment classes
-    - [ ] Find and report important facts about the data
-    - [ ] Check and report correlation of sentiment feature with other features.
+    - [x] Indicate distribution of the sentiment classes
+    - [x] Find and report important facts about the data
+    - [x] Check and report correlation of sentiment feature with other features.
+    - [x] Report on correlation of all variables
+    - [ ] Most occuring character or character groups (words, phrases, sentences)
+    - [ ] Do we need any preprocessing for the conversations? Are they clear? How can we check it?
   - [ ] Determine necessary features
     - [ ] Explain why they are necessary
   - [ ] Prepare train and validation subsets
