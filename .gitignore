@@ -4,3 +4,6 @@
 .ipynb_checkpoints/
 */__pycache__/
 *.swp
+2_docs/
+.DS_Store/
+.env
