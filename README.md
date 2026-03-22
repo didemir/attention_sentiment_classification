@@ -1,50 +1,54 @@
-# Sentiment Analysis
+# DI725 Assignment 1 — Sentiment Classification of Customer-Service Conversations
 
-This is the **Assignment 1** of **Transformers and Attention-Based Deep Networks** Course.
+**Course:** Transformers and Attention-Based Deep Networks  
+**Student:** Didem Demir — 2739563  
 
-## Details
+## Task
 
-* The task is to classify the sentiment of customer service conversations.
-* WANDB will be used for experiment tracking and hyperparameter tuning.
-* Github and git will be used for version control and publishing.
-* A suitable attention-based network will be used for sentiment classification.
-* Input will be _customer-support interaction_ while the output is expected to be _positive, negative, or neutral_
+3-class sentiment classification (**positive / negative / neutral**) of customer-service conversations using a fine-tuned BERT model.
 
-## TODOs
-
-- [ ] Data exploration and pre-processing
-  - [ ] Prepare an Exploratory Data Analysis (EDA)
-    - [x] Indicate distribution of the sentiment classes
-    - [x] Find and report important facts about the data
-    - [x] Check and report correlation of sentiment feature with other features.
-    - [x] Report on correlation of all variables
-    - [ ] Most occuring character or character groups (words, phrases, sentences)
-    - [ ] Do we need any preprocessing for the conversations? Are they clear? How can we check it?
-  - [ ] Determine necessary features
-    - [ ] Explain why they are necessary
-  - [ ] Prepare train and validation subsets
-    - [ ] Make sure there is no data-leakage from test dataset
-  - [ ] Complete data preprocessing
-    - [ ] Explain each step
-    - [ ] Justify your approaches
-  - [ ] Include figures, tables and plots
-- [ ] Model training
-  - [ ] Decide on training from scratch or fine-tuning
-    - [ ] Justify your decision
-  - [ ] Evaluate the trained model on the test set
-  - [ ] Report the results with appropriate evaluation metrics
-  - [ ] The code will be submited to odtuclass and it must be working and reproducible 
-  - [ ] The code must made publicly available at the github repo
-  - [ ] Experiments must be recorded by utilizing WANDB and the report must be publicly available as a dashboard or report
-- [ ] Prepare a report that clearly explains the steps
-
-## Dataset
+## Repository Structure
 
 ```
-0_data/
-├── test.csv
-└── train.csv
+├── 0_data/
+│   ├── train.csv                  # Training data (970 samples)
+│   └── test.csv                   # Test data (30 samples) — never used during training
+├── main.ipynb                     # Full pipeline: EDA → augmentation → training → evaluation
+├── requirements.txt               # Python dependencies
+├── .gitignore
+└── README.md
 ```
+
+## Approach
+
+- **EDA:** Cramer's V analysis for feature selection; removed data-leaking and low-signal columns
+- **Augmentation:** Gemini paraphrasing + EN→FR→EN back-translation to expand 17 positive samples to 68
+- **Model:** `bert-base-uncased` + learned categorical embeddings (BertTabular)
+- **Training:** Differential learning rates (2e-5 BERT / 1e-3 head), weighted cross-entropy, linear warmup
+- **Truncation:** Tail truncation — keeps last 510 tokens to preserve sentiment-rich conversation endings
+
+## Results
+
+| Metric | Value |
+|---|---|
+| Best Val Macro F1 | 0.862 (epoch 5) |
+| Test Macro F1 | 0.614 |
+| Test Accuracy | 0.633 |
+
+## Experiment Tracking
+
+WANDB project: `DI725-sentiment` — run `bert-tabular-v1`  
+Public dashboard: https://wandb.ai/didem-demir_01-middle-east-technical-university/DI725-sentiment
+
+## Setup
+
+```bash
+pip install -r requirements.txt
+```
+
+Then run `main.ipynb` top to bottom.
+
+> ⚠️ A Gemini API key is required for the augmentation step. Add it to a `.env` file as `GEMINI_API_KEY=...`. The augmented data is already saved, so this step can be skipped on re-runs.
 
 ## Environment
 
