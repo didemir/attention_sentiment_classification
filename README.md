@@ -1,7 +1,6 @@
-# DI725 Assignment 1 — Sentiment Classification of Customer-Service Conversations
+# Sentiment Classification of Customer-Service Conversations
 
 **Course:** Transformers and Attention-Based Deep Networks  
-**Student:** Didem Demir — 2739563  
 
 ## Task
 
